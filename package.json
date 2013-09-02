@@ -1,0 +1,14 @@
+{
+  "name": "gruntjs-livereload-beginning",
+  "version": "0.0.1",
+  "Dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-connect": "~0.4.0",
+    "grunt-contrib-livereload": "~0.1.2",
+    "grunt-regarde": "~0.1.1",
+    "grunt-open": "~0.2.2",
+    "matchdep": "~0.1.2",
+    "grunt-contrib-coffee": "~0.7.0"
+  }
+}
