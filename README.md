@@ -1,11 +1,14 @@
-# Grunt LiveReload Basic
+grunt-livereload-starter
+========================
 
-## Getting stat
+Grunt LiveReload Basic
+
+# Getting stat
 
   npm install
 
   grunt
 
-## update
-
-0.0.1 grunt beginning...
+# update
+0.0.1 use grunt-livereload
+0.0.0 grunt beginning... use
