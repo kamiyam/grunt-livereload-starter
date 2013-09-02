@@ -1,11 +1,11 @@
 "use strict"
 
-path = require("path")
-lrSnippet = require("grunt-contrib-livereload/lib/utils").livereloadSnippet
+LIVERELOAD_PORT = 35729
+lrSnippet = require('connect-livereload')( port: LIVERELOAD_PORT )
 folderMount = (connect, base) ->
   console.log(base)
   # Serve static files.
-  connect.static ( path.resolve base )
+  connect.static ( require("path").resolve base )
 
 module.exports = (grunt) ->
 
@@ -21,15 +21,22 @@ module.exports = (grunt) ->
             [lrSnippet, folderMount(connect, ".")]
 
     # Configuration to be run (and then tested)
-    regarde:
-      fred:
+    watch:
+      options:
+        nospawn: false
+        livereload: true
+
+      livereload:
+        options:
+          livereload: LIVERELOAD_PORT
         files: "*.html"
-        tasks: ["livereload"]
 
     # browser open
     open:
       server:
         path: "http://localhost:<%= connect.options.port %>"
+        app: 'Google Chrome Canary'
+#        app: 'Google Chrome'
 
     coffee:
       grunt:
@@ -40,4 +47,4 @@ module.exports = (grunt) ->
   require('matchdep').filterDev('grunt-*').forEach grunt.loadNpmTasks
 
   # task configure
-  grunt.registerTask "default", ["coffee:grunt", "livereload-start", "connect", "open", "regarde"]
+  grunt.registerTask "default", ["coffee:grunt", "connect", "open", "watch"]
