@@ -2,12 +2,11 @@ grunt-livereload-starter
 ========================
 
 Grunt LiveReload Basic
-gigits
+
 # Getting Started
 
-  npm install
-
-  grunt
+	npm install
+	grunt
 
 # update
 
