@@ -12,4 +12,4 @@ Grunt LiveReload Basic
 
 - 0.0.2 use grunt-contrib-watch
 - 0.0.1 use grunt-contrib-livereload
-- 0.0.0 grunt beginning... use
+- 0.0.0 grunt beginning...
