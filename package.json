@@ -1,14 +1,35 @@
 {
-  "name": "gruntjs-livereload-beginning",
+  "name": "grunt-livereload-basic",
   "version": "0.0.2",
-  "Dependencies": {},
+  "description": "grunt-livereload-starter",
+  "main": "npm start",
+  "dependencies": {
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
+    "connect-livereload": "~0.2.0",
     "grunt-contrib-coffee": "~0.7.0",
     "grunt-contrib-connect": "~0.4.0",
     "grunt-contrib-watch": "~0.5.3",
     "grunt-open": "~0.2.2",
-    "matchdep": "~0.1.2",
-    "connect-livereload": "~0.2.0"
+    "matchdep": "~0.1.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kamiyam/grunt-livereload-starter.git"
+  },
+  "keywords": [
+    "grunt",
+    ""
+  ],
+  "author": "kamiyam",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "122c8815e700b4b38d33f26f2ef37937a4c0db2d",
+  "bugs": {
+    "url": "https://github.com/kamiyam/grunt-livereload-starter/issues"
   }
 }
