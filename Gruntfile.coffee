@@ -1,6 +1,8 @@
 "use strict"
 
+# Listen on port 35729
 LIVERELOAD_PORT = 35729
+
 lrSnippet = require('connect-livereload')( port: LIVERELOAD_PORT )
 folderMount = (connect, base) ->
   console.log(base)
@@ -18,18 +20,24 @@ module.exports = (grunt) ->
       livereload:
         options:
           middleware: (connect, options) ->
-            [lrSnippet, folderMount(connect, ".")]
+            [lrSnippet, folderMount(connect, "public")]
 
     # Configuration to be run (and then tested)
     watch:
       options:
-        nospawn: false
         livereload: true
+
+      coffee:
+        options:
+          livereload: false
+        files: ["public/coffee/**/*.coffee"]
+        tasks: ["coffee:coffees"]
 
       livereload:
         options:
+          cwd: "./public"
           livereload: LIVERELOAD_PORT
-        files: "*.html"
+        files: ["**/*.html","css/**/*.css","js/**/*.js"]
 
     # browser open
     open:
@@ -42,9 +50,18 @@ module.exports = (grunt) ->
       grunt:
         files:
           ".Gruntfile.js": "Gruntfile.coffee"
+      coffees:
+        options:
+          bare: true
+        expand: true
+        flatten: true
+        src: ['public/coffee/**/*.coffee']
+        dest: 'public/js/'
+        ext: '.js'
+
 
   # modules load
   require('matchdep').filterDev('grunt-*').forEach grunt.loadNpmTasks
 
   # task configure
-  grunt.registerTask "default", ["coffee:grunt", "connect", "open", "watch"]
+  grunt.registerTask "default", ["coffee", "connect", "open", "watch"]
