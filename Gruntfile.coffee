@@ -43,8 +43,8 @@ module.exports = (grunt) ->
     open:
       server:
         path: "http://localhost:<%= connect.options.port %>"
-        app: 'Google Chrome Canary'
 #        app: 'Google Chrome'
+        app: 'Google Chrome Canary'
 #      file:
 #        path: '/etc/hosts'
 #        app: 'Sublime Text'
