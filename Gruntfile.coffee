@@ -42,12 +42,14 @@ module.exports = (grunt) ->
     # browser open
     open:
       server:
-        path: "http://local.jp:<%= connect.options.port %>"
+        path: "http://localhost:<%= connect.options.port %>"
         app: 'Google Chrome Canary'
 #        app: 'Google Chrome'
 #        file:
-#        path : '/etc/hosts'
-    
+#      file:
+#        path: '/etc/hosts'
+#        app: 'Sublime Text'
+
     coffee:
       grunt:
         files:
