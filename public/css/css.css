@@ -1,0 +1,11 @@
+body {
+  width: 100%;
+}
+
+body #css{
+  color: #000;
+  line-height: 2em;
+  margin: 1em auto;
+  width: 90%;
+  border: solid 1px #000;
+}

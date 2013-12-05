@@ -20,51 +20,118 @@ module.exports = (grunt) ->
       livereload:
         options:
           middleware: (connect, options) ->
-            [lrSnippet, folderMount(connect, "public")]
+            [
+              lrSnippet
+              folderMount(connect, ".tmp/public")
+              folderMount(connect, "public")
+            ]
 
-    # Configuration to be run (and then tested)
-    watch:
-      options:
-        livereload: true
+    #Set compile settings
+    sass:
+      dev:
+        files: [
+          expand: true
+          cwd: "public/css/"
+          src: ["**/*.sass","**/*.scss"]
+          dest: ".tmp/public/css/"
+          ext: ".css"
+        ]
 
-      coffee:
-        options:
-          livereload: false
-        files: ["public/coffee/**/*.coffee"]
-        tasks: ["coffee:coffees"]
+    less:
+      dev:
+        files: [
+          expand: true
+          cwd: "public/css/"
+          src: ["**/*.less"]
+          dest: ".tmp/public/css/"
+          ext: ".css"
+        ]
 
-      livereload:
-        options:
-          cwd: "./public"
-          livereload: LIVERELOAD_PORT
-        files: ["**/*.html","css/**/*.css","js/**/*.js"]
-
-    # browser open
-    open:
-      server:
-        path: "http://localhost:<%= connect.options.port %>"
-#        app: 'Google Chrome'
-        app: 'Google Chrome Canary'
-#      file:
-#        path: '/etc/hosts'
-#        app: 'Sublime Text'
+    stylus:
+      dev:
+        files: [
+          expand: true
+          cwd: "public/css/"
+          src: ["**/*.styl"]
+          dest: ".tmp/public/css/"
+          ext: ".css"
+        ]
 
     coffee:
       grunt:
         files:
           ".Gruntfile.js": "Gruntfile.coffee"
-      coffees:
-        options:
-          bare: true
-        expand: true
-        flatten: true
-        src: ['public/coffee/**/*.coffee']
-        dest: 'public/js/'
-        ext: '.js'
 
+      dev:
+        files: [
+          options:
+            bare: true
+          expand: true
+          cwd: "public/js/"
+          src: ['**/*.coffee']
+          dest: ".tmp/public/js/"
+          ext: '.js'
+        ]
+
+    # watch files settings
+    watch:
+      options:
+        livereload: false
+
+      sass:
+        options:
+          cwd: "public/css"
+        files: ["**/*.sass", "**/*.scss"]
+        tasks: ["sass:dev"]
+
+      less:
+        options:
+          cwd: "public/css"
+        files: ["**/*.less"]
+        tasks: ["less:dev"]
+
+      stylus:
+        options:
+          cwd: "public/css"
+        files: ["**/*.styl"]
+        tasks: ["stylus:dev"]
+
+      coffee:
+        options:
+          cwd: "public/js"
+        files: ["**/*.coffee"]
+        tasks: ["coffee:dev"]
+
+      plain:
+        options:
+          cwd: "public"
+          livereload: LIVERELOAD_PORT
+        files: ["**/*.html", "css/**/*.css", "js/**/*.js"]
+
+      compiled:
+        options:
+          cwd: ".tmp/public"
+          livereload: LIVERELOAD_PORT
+        files: ["**/*.html", "css/**/*.css", "js/**/*.js"]
+
+    clean:
+      dev:
+        src: [".tmp/**"]
+
+  # browser open
+    open:
+      server:
+        path: "http://localhost:<%= connect.options.port %>"
+#        app: 'Google Chrome'
+        app: 'Google Chrome Canary'
+  #      file:
+  #        path: '/etc/hosts'
+  #        app: 'Sublime Text'
 
   # modules load
   require('matchdep').filterDev('grunt-*').forEach grunt.loadNpmTasks
 
   # task configure
-  grunt.registerTask "default", ["coffee", "connect", "open", "watch"]
+  grunt.registerTask "default", ["clean", "compile", "connect", "open", "watch"]
+
+  grunt.registerTask "compile", ["coffee:dev", "sass:dev", "less:dev", "stylus:dev"]
