@@ -3,12 +3,14 @@ grunt-livereload-starter
 
 Grunt LiveReload Basic
 
-# Getting Started
+## Getting Started
 
+	git clone git@github.com:kamiyam/grunt-livereload-starter.git
+	cd grunt-livereload-starter
 	npm install
 	grunt
 
-# Change log
+## Change log
 
 - 0.0.5 Add TypeScript compiler setting
 - 0.0.4 Add meta compiler( Sass,LESS,Stylus ) setting
