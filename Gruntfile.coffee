@@ -73,6 +73,16 @@ module.exports = (grunt) ->
           ext: '.js'
         ]
 
+    typescript:
+      dev:
+        files: [
+          expand: true
+          cwd: "public/js/"
+          src: ['**/*.ts']
+          dest: ".tmp/public/js/"
+          ext: '.js'
+        ]
+
     # watch files settings
     watch:
       options:
@@ -101,6 +111,12 @@ module.exports = (grunt) ->
           cwd: "public/js"
         files: ["**/*.coffee"]
         tasks: ["coffee:dev"]
+
+      typescript:
+        options:
+          cwd: "public/js"
+        files: ["**/*.ts"]
+        tasks: ["typescript:dev"]
 
       plain:
         options:
@@ -134,4 +150,4 @@ module.exports = (grunt) ->
   # task configure
   grunt.registerTask "default", ["clean", "compile", "connect", "open", "watch"]
 
-  grunt.registerTask "compile", ["coffee:dev", "sass:dev", "less:dev", "stylus:dev"]
+  grunt.registerTask "compile", ["coffee:dev","typescript:dev", "sass:dev", "less:dev", "stylus:dev"]
