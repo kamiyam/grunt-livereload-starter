@@ -39,3 +39,7 @@ production folder output
 - 0.0.2 use grunt-contrib-watch
 - 0.0.1 use grunt-contrib-livereload
 - 0.0.0 grunt beginning...
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/kamiyam/grunt-livereload-starter/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
