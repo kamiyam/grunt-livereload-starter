@@ -17,7 +17,7 @@ module.exports = (grunt) ->
       options:
         port: 9000
         hostname: "localhost"
-      livereload:
+      dev:
         options:
           middleware: (connect, options) ->
             [
@@ -26,7 +26,15 @@ module.exports = (grunt) ->
               folderMount(connect, "public")
             ]
 
-    #Set compile settings
+      dist:
+        options:
+          middleware: (connect, options) ->
+            [
+              lrSnippet
+              folderMount(connect, "dist")
+            ]
+
+  #Set compile settings
     sass:
       dev:
         files: [
@@ -83,7 +91,7 @@ module.exports = (grunt) ->
           ext: '.js'
         ]
 
-    # watch files settings
+  # watch files settings
     watch:
       options:
         livereload: false
@@ -131,23 +139,45 @@ module.exports = (grunt) ->
         files: ["**/*.html", "css/**/*.css", "js/**/*.js"]
 
     clean:
+      grunt:
+        src: ".Gruntfile.js"
       dev:
         src: [".tmp/**"]
+      dist:
+        src: ["dist/**"]
+
+    copy:
+      dist:
+        files:[
+          {
+            expand: true
+            cwd: 'public/'
+            src: ["**","!**/*.{coffee,ts,sass,scss,less,styl}"]
+            dest: "dist/"
+          },
+          {
+            expand: true,
+            cwd: ".tmp/public/"
+            src: ["**"],
+            dest: "dist/"
+          }
+        ]
 
   # browser open
     open:
       server:
         path: "http://localhost:<%= connect.options.port %>"
-#        app: 'Google Chrome'
         app: 'Google Chrome Canary'
-  #      file:
-  #        path: '/etc/hosts'
-  #        app: 'Sublime Text'
 
   # modules load
   require('matchdep').filterDev('grunt-*').forEach grunt.loadNpmTasks
 
   # task configure
-  grunt.registerTask "default", ["clean", "compile", "connect", "open", "watch"]
+  grunt.registerTask "default", ["clean", "coffee:grunt", "compile", "connect:dev", "open", "watch"]
+
+  grunt.registerTask "deploy", ["clean", "compile", "copy:dist"]
+
+  grunt.registerTask "dist", ["deploy", "connect:dist", "open", "watch"]
 
   grunt.registerTask "compile", ["coffee:dev","typescript:dev", "sass:dev", "less:dev", "stylus:dev"]
+
