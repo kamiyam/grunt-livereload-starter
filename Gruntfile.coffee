@@ -167,7 +167,7 @@ module.exports = (grunt) ->
     open:
       server:
         path: "http://localhost:<%= connect.options.port %>"
-        app: 'Google Chrome Canary'
+#        app: 'Google Chrome Canary'
 
   # modules load
   require('matchdep').filterDev('grunt-*').forEach grunt.loadNpmTasks
