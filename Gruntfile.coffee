@@ -173,9 +173,12 @@ module.exports = (grunt) ->
   require('matchdep').filterDev('grunt-*').forEach grunt.loadNpmTasks
 
   # task configure
-  grunt.registerTask "default", ["clean", "coffee:grunt", "compile", "connect:dev", "open", "watch"]
+  grunt.registerTask "default", ->
+    grunt.task.run ["serv"];
 
-  grunt.registerTask "deploy", ["clean", "compile", "copy:dist"]
+  grunt.registerTask "serv", ["clean", "coffee:grunt", "compile", "connect:dev", "open", "watch"]
+
+  grunt.registerTask "build", ["clean", "compile", "copy:dist"]
 
   grunt.registerTask "dist", ["deploy", "connect:dist", "open", "watch"]
 
