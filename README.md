@@ -25,7 +25,7 @@ grunt dist
 Server start on production mode
 
 ```
-grunt deploy
+grunt build
 ```
 
 production folder output
