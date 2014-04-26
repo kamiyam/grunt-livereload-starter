@@ -180,7 +180,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask "build", ["clean", "compile", "copy:dist"]
 
-  grunt.registerTask "dist", ["deploy", "connect:dist", "open", "watch"]
+  grunt.registerTask "dist", ["build", "connect:dist", "open", "watch"]
 
   grunt.registerTask "compile", ["coffee:dev","typescript:dev", "sass:dev", "less:dev", "stylus:dev"]
 
