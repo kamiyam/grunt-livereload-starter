@@ -32,6 +32,7 @@ production folder output
 
 ## Change log
 
+- 0.0.7 Add Bable compiler setting
 - 0.0.6 Add production folder output (dist folder)
 - 0.0.5 Add TypeScript compiler setting
 - 0.0.4 Add meta compiler( Sass,LESS,Stylus ) setting

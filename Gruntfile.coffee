@@ -91,7 +91,19 @@ module.exports = (grunt) ->
           ext: '.js'
         ]
 
-  # watch files settings
+    babel:
+      options:
+        sourceMap: true
+      dev:
+        files:[
+          expand: true
+          cwd: "public/js/"
+          src: ['**/*.es6']
+          dest: ".tmp/public/js/"
+          ext: '.js'
+        ]
+
+# watch files settings
     watch:
       options:
         livereload: false
@@ -113,6 +125,12 @@ module.exports = (grunt) ->
           cwd: "public/css"
         files: ["**/*.styl"]
         tasks: ["stylus:dev"]
+
+      babel:
+        options:
+          cwd: "public/js"
+        files: ["**/*.es6"]
+        tasks: ["babel:dev"]
 
       coffee:
         options:
@@ -182,5 +200,5 @@ module.exports = (grunt) ->
 
   grunt.registerTask "dist", ["build", "connect:dist", "open", "watch"]
 
-  grunt.registerTask "compile", ["coffee:dev","typescript:dev", "sass:dev", "less:dev", "stylus:dev"]
+  grunt.registerTask "compile", ["babel:dev", "coffee:dev", "typescript:dev", "sass:dev", "less:dev", "stylus:dev"]
 
